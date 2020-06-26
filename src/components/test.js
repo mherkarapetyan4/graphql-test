@@ -4,10 +4,11 @@ import { gql } from "apollo-boost";
 
 const ARTISTS_SCHEMA = gql`
   {
-    popular_artists {
+    popular_artists(exclude_followed_artists: false) {
       artists {
         id
         name
+        is_followed
       }
     }
   }
@@ -24,9 +25,10 @@ const ARTIST_SCHEMA = gql`
 
 const mutation = gql`
   mutation {
-    followArtist(input: { artist_id: "anish-kapoor" }) {
+    followArtist(input: { artist_id: "anish-kapoor", unfollow: false }) {
       artist {
         id
+        is_followed
       }
     }
   }
@@ -41,23 +43,25 @@ const mutation = gql`
 // }
 
 const Test = () => {
-  //   const { loading, data, error } = useQuery(ARTIST_SCHEMA, {
-  //     variables: {
-  //       id: "anish-kapoor",
-  //     },
-  //   });
-  //   if (loading) return "loading ...";
-  //   if (error) console.log(error, "error");
+  const { loading, data, error } = useQuery(ARTISTS_SCHEMA);
+  const [setFollow] = useMutation(mutation);
 
-  //   console.log(data);
+  if (loading) return "loading ...";
+  if (error) console.log(error, "error");
 
-  const [setFollow, { loading, error, data }] = useMutation(mutation);
+    console.log(data);
 
-  console.log(data, error)
+  // console.log(data, error)
 
-  return <div onClick={() => {
-      setFollow()
-  }}>safdfs</div>;
+  return (
+    <div
+      onClick={() => {
+        setFollow();
+      }}
+    >
+      safdfs
+    </div>
+  );
 };
 
 export default Test;
