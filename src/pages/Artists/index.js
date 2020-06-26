@@ -1,18 +1,8 @@
 import React from "react";
-import { FetchingList, ListItem } from "../../components";
-import { gql } from "apollo-boost";
+import { FetchingList, ListItem } from "components";
 import { Link } from "react-router-dom";
-const ARTISTS_SCHEMA = gql`
-  query GetArtists($exclude_followed_artists: Boolean!) {
-    popular_artists(exclude_followed_artists: $exclude_followed_artists) {
-      artists {
-        id
-        name
-        is_followed
-      }
-    }
-  }
-`;
+import { ARTISTS_SCHEMA } from "api/query";
+
 const ArtistsPage = () => {
   return (
     <div>
@@ -24,7 +14,7 @@ const ArtistsPage = () => {
           </ListItem>
         )}
         contentKey={"popular_artists.artists"}
-        params={{ exclude_followed_artists: true }}
+        params={{ exclude_followed_artists: false }}
       />
     </div>
   );

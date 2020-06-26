@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { ApolloProvider } from "@apollo/react-hooks"; 
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import ArtistsPage from "./pages/Artists";
-import CurrentArtist from "./pages/Artists/Current";
-import { client } from "./api/client";
+import ArtistsPage from "pages/Artists";
+import CurrentArtist from "pages/Artists/Current";
+import { client } from "api/client";
 
 function App() {
   return (

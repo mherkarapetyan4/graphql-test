@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { get } from "../../utils/helper";
+import { get } from "utils/helper";
 
 //  props
 /// schema - gql schema - required
