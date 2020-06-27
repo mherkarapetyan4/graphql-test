@@ -1,5 +1,5 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import React, { useEffect } from "react";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { get } from "utils/helper";
 
 //  props
@@ -8,11 +8,24 @@ import { get } from "utils/helper";
 /// params - object - params for graphql variables\ -
 /// contentKey - string
 export const FetchingList = ({ schema, renderItem, contentKey, params }) => {
-  const { loading, data, error } = useQuery(schema, {
-      variables: params
+  // const { loading, data, error } = useQuery(schema, {
+  //   variables: params,
+  //   awaitRefetchQueries: true,
+  // });
+  const [execute, { loading, data, error }] = useLazyQuery(schema, {
+    variables: params,
+    awaitRefetchQueries: true,
   });
+
+  useEffect(() => {
+    execute();
+  }, []);
 
   if (loading) return "loader ....";
   if (error) console.log(error);
-  return <div>{get(data, contentKey, []).map(renderItem)}</div>;
+  return (
+    <div className={"list-group"}>
+      {get(data, contentKey, []).map(renderItem)}
+    </div>
+  );
 };

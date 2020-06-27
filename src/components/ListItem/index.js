@@ -1,5 +1,9 @@
 import React from "react";
 
 export const ListItem = (props) => {
-  return <div onClick={props.onClick}>{props.children}</div>;
+  return (
+    <div className={"list-group-item"} onClick={props.onClick}>
+      {props.children}
+    </div>
+  );
 };

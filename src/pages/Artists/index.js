@@ -3,7 +3,7 @@ import { FetchingList, ListItem } from "components";
 import { Link } from "react-router-dom";
 import { ARTISTS_SCHEMA } from "api/query";
 
-const ArtistsPage = () => {
+const ArtistsPage = () => { 
   return (
     <div>
       <FetchingList

@@ -47,10 +47,7 @@ const Test = () => {
   const [setFollow] = useMutation(mutation);
 
   if (loading) return "loading ...";
-  if (error) console.log(error, "error");
-
-    console.log(data);
-
+  if (error) console.log(error, "error"); 
   // console.log(data, error)
 
   return (
